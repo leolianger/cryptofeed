@@ -5,12 +5,12 @@ Please see the LICENSE file for the terms and conditions
 associated with this software.
 '''
 import os,sys
-# curDir = os.path.dirname(__file__)
-# sys.path.append(os.path.abspath(os.path.dirname(__file__)+'/../'))
-# sys.path.append(os.path.abspath(os.path.dirname(__file__)+'/'))
-# cur_dir = os.path.dirname( os.path.abspath(__file__)) or os.getcwd()
-# sys.path.append(cur_dir)
-# sys.path.append("..")
+curDir = os.path.dirname(__file__)
+sys.path.append(os.path.abspath(os.path.dirname(__file__)+'/../'))
+sys.path.append(os.path.abspath(os.path.dirname(__file__)+'/'))
+cur_dir = os.path.dirname( os.path.abspath(__file__)) or os.getcwd()
+sys.path.append(cur_dir)
+sys.path.append("..")
 
 
 
