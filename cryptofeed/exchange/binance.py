@@ -13,7 +13,7 @@ from time import time
 
 import aiohttp
 from sortedcontainers import SortedDict as sd
-from yapic import json
+import json
 
 from cryptofeed.defines import BID, ASK, BINANCE, BUY, FUNDING, L2_BOOK, LIQUIDATIONS, OPEN_INTEREST, SELL, TICKER, TRADES
 from cryptofeed.feed import Feed

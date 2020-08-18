@@ -9,7 +9,7 @@ import zlib
 from decimal import Decimal
 
 from sortedcontainers import SortedDict as sd
-from yapic import json
+import json
 
 from cryptofeed.defines import (ASK, BID, BUY, FUNDING, L2_BOOK, OKCOIN, OPEN_INTEREST, SELL, TICKER,
                                 TICKER_FUTURES, TICKER_SWAP, TRADES, TRADES_FUTURES, TRADES_SWAP)

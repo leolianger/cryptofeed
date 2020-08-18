@@ -14,7 +14,7 @@ from time import time
 import aiohttp
 import pandas as pd
 from sortedcontainers import SortedDict as sd
-from yapic import json
+import json
 
 from cryptofeed.defines import BID, ASK, BUY
 from cryptofeed.defines import FTX as FTX_id

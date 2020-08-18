@@ -3,7 +3,7 @@ from decimal import Decimal
 
 import requests
 from sortedcontainers import SortedDict as sd
-from yapic import json
+import json
 
 from cryptofeed.defines import BID, ASK, BUY, L2_BOOK, SELL, TICKER, TRADES, UPBIT
 from cryptofeed.feed import Feed

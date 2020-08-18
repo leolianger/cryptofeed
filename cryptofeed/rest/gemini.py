@@ -8,7 +8,7 @@ from time import sleep, time
 import pandas as pd
 import requests
 from sortedcontainers.sorteddict import SortedDict as sd
-from yapic import json
+import json
 
 from cryptofeed.defines import BID, ASK, BUY, CANCELLED, FILLED, GEMINI, LIMIT, OPEN, PARTIAL, SELL
 from cryptofeed.rest.api import API, request_retry
