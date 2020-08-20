@@ -60,16 +60,16 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
         bid_amount = float(bids[price])
         order_book_j['bids'].insert(0,{"price":bid_price, "amount":bid_amount})
         # print(f"bid0 price is {price}, amount {bids[price]}")
-        if(bid0_price ==0):
+        if(bid_price > bid0_price):
             bid0_price = bid_price
 
-    ask0_price = 0
+    ask0_price = 100000000000000000000
     asks = book[ASK]
     for price in asks:
         ask_price = float(price)
         ask_amount = float(asks[ask_price])
         order_book_j['asks'].append({"price":ask_price, "amount":ask_amount})
-        if(ask0_price ==0):
+        if(ask_price < ask0_price):
             ask0_price = ask_price
 
     pair_key = f"ftx_{pair.lower()}_book"
