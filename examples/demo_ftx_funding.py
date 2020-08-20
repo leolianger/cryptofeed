@@ -76,7 +76,7 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
     # print(f"set {pair_key}")
     order_book_j['update_timestamp'] = time.time()
     order_book_j['update_timestamp_s'] = arrow.get(order_book_j['update_timestamp']).format()
-    print(f"set {pair_key} ask0:{ask0_price}, bid0:{bid0_price}")
+    print(f"set {pair_key} ask0: {ask0_price}, bid0: {bid0_price}, diff {ask0_price - bid0_price}")
     r.set(pair_key,json.dumps(order_book_j))
 
 
