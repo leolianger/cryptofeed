@@ -53,30 +53,37 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
     order_book_j['asks'] = []
     order_book_j['bids'] = []
 
+    bid0_price = 0
     bids = book[BID]
     for price in bids:
         bid_price = float(price)
         bid_amount = float(bids[price])
         order_book_j['bids'].insert(0,{"price":bid_price, "amount":bid_amount})
         # print(f"bid0 price is {price}, amount {bids[price]}")
+        if(bid0_price ==0):
+            bid0_price = bid_price
 
+    ask0_price = 0
     asks = book[ASK]
     for price in asks:
         ask_price = float(price)
         ask_amount = float(asks[ask_price])
         order_book_j['asks'].append({"price":ask_price, "amount":ask_amount})
+        if(ask0_price ==0):
+            ask0_price = ask_price
 
     pair_key = f"ftx_{pair.lower()}_book"
     # print(f"set {pair_key}")
     order_book_j['update_timestamp'] = time.time()
     order_book_j['update_timestamp_s'] = arrow.get(order_book_j['update_timestamp']).format()
-    print(f"set {pair_key} {order_book_j}")
+    print(f"set {pair_key} ask0:{ask0_price}, bid0:{bid0_price}")
     r.set(pair_key,json.dumps(order_book_j))
 
 
 def main():
     f = FeedHandler()
-    f.add_feed(FTX(max_depth=10,pairs=['BTC-PERP'], channels=[FUNDING,L2_BOOK], callbacks={L2_BOOK: BookCallback(book),FUNDING: FundingCallback(funding)}))
+    # f.add_feed(FTX(max_depth=10,pairs=['BTC-PERP'], channels=[FUNDING,L2_BOOK], callbacks={L2_BOOK: BookCallback(book),FUNDING: FundingCallback(funding)}))
+    f.add_feed(FTX(max_depth=10,pairs=['BTC-PERP'], channels=[L2_BOOK], callbacks={L2_BOOK: BookCallback(book),FUNDING: FundingCallback(funding)}))
 
 
     f.run()
