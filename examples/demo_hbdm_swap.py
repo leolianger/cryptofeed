@@ -75,7 +75,8 @@ def main():
     pairs_list = ['BTC-USD','ETH-USD','LTC-USD','EOS-USD','ADA-USD','LINK-USD','ZEC-USD','KNC-USD',
                   'BCH-USD','BSV-USD','XRP-USD','ETC-USD','TRX-USD','ATOM-USD','IOTA-USD','NEO-USD',
                   'ONT-USD','XLM-USD','XMR-USD','XTZ-USD','DASH-USD','ALGO-USD','VET-USD','ZRX-USD',
-                  'DOGE-USD','THETA-USD','BAND-USD']
+                  'DOGE-USD','THETA-USD','BAND-USD','OMG-USD','ANT-USD','SNX-USD','WAVES-USD',
+                  'COMP-USD','BTM-USD','MKR-USD','JST-USD','IOST-USD','REN-USD','BAL-USD']
 
 
     # fh.add_feed(OKEx(pairs=['EOS-USD-SWAP'], channels=[TRADES_SWAP, L2_BOOK_SWAP, OPEN_INTEREST, FUNDING], callbacks={FUNDING: funding, OPEN_INTEREST: open_interest, TRADES: TradeCallback(trade), L2_BOOK: BookCallback(book), TICKER_SWAP:TickerCallback(ticker)}))
