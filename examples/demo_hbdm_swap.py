@@ -61,7 +61,7 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
     r.set(pair_key,json.dumps(j))
 
 
-    if((not pair_key in last_update_timestamp_dict) or ( (pair_key in last_update_timestamp_dict) and (time.time() - last_update_timestamp_dict[pair_key] > 60))):
+    if((not pair_key in last_update_timestamp_dict) or ( (pair_key in last_update_timestamp_dict) and (time.time() - last_update_timestamp_dict[pair_key] > 300))):
         last_update_timestamp_dict[pair_key] = time.time()
         response = requests.get(server_record_redis_url + f"?key={pair_key}&value={json.dumps(j)}")
         if response.status_code == 200:
