@@ -61,13 +61,13 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
     r.set(pair_key,json.dumps(j))
 
 
-    if((not pair_key in last_update_timestamp_dict) or ( (pair_key in last_update_timestamp_dict) and (time.time() - last_update_timestamp_dict[pair_key] > 300))):
-        last_update_timestamp_dict[pair_key] = time.time()
-        response = requests.get(server_record_redis_url + f"?key={pair_key}&value={json.dumps(j)}")
-        if response.status_code == 200:
-            print(f"set {pair_key} {response.text}")
-        else:
-            print(f"{response.status_code}")
+    # if((not pair_key in last_update_timestamp_dict) or ( (pair_key in last_update_timestamp_dict) and (time.time() - last_update_timestamp_dict[pair_key] > 300))):
+    #     last_update_timestamp_dict[pair_key] = time.time()
+    #     response = requests.get(server_record_redis_url + f"?key={pair_key}&value={json.dumps(j)}")
+    #     if response.status_code == 200:
+    #         print(f"set {pair_key} {response.text}")
+    #     else:
+    #         print(f"{response.status_code}")
 
 async def open_interest(feed, pair, open_interest, timestamp, receipt_timestamp):
     print(f'Timestamp: {timestamp} Feed: {feed} Pair: {pair} open interest: {open_interest}')
@@ -106,8 +106,8 @@ def main():
     fh.run()
 
 
-last_update_timestamp_dict = {}
-server_record_redis_url = json.load(open("./url_conf.json","r"))['set_redis_key'] #"http://127.0.0.1:6007/api/set_redis_key"
+# last_update_timestamp_dict = {}
+# server_record_redis_url = json.load(open("./url_conf.json","r"))['set_redis_key'] #"http://127.0.0.1:6007/api/set_redis_key"
 
 if __name__ == '__main__':
     main()
