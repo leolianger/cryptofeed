@@ -88,7 +88,8 @@ def main():
                   'DOGE-USD','THETA-USD','BAND-USD','OMG-USD','ANT-USD','SNX-USD','WAVES-USD',
                   'COMP-USD','BTM-USD','MKR-USD','JST-USD','IOST-USD','REN-USD','BAL-USD','JST-USD','DOT-USD'
                   ,'QTUM-USD','CRV-USD','BAT-USD','KSM-USD','RSR-USD','AKRO-USD','LUNA-USD','STORJ-USD','YFI-USD',
-                  'SUSHI-USD' , 'PEARL-USD', 'YFII-USD', 'GXC-USD', 'YFV-USD', 'TRB-USD']
+                  'SUSHI-USD' , 'PEARL-USD', 'YFII-USD', 'GXC-USD',  'TRB-USD',  'UNI-USD',  'USDT-USD']
+    # 'YFV-USD',
 
     # 'LEND-USD',
 
