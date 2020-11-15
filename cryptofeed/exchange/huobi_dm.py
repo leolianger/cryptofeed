@@ -76,11 +76,11 @@ class HuobiDM(Feed):
         update = {
             BID: sd({
                 Decimal(price): Decimal(amount)
-                for price, amount in data['bids']
+                for price, amount in data.get('bids',[])
             }),
             ASK: sd({
                 Decimal(price): Decimal(amount)
-                for price, amount in data['asks']
+                for price, amount in data.get('asks',[])
             })
         }
 
