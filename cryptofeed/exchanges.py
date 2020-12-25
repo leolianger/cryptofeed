@@ -27,6 +27,7 @@ from cryptofeed.exchange.hitbtc import HitBTC
 from cryptofeed.exchange.huobi import Huobi
 from cryptofeed.exchange.huobi_dm import HuobiDM
 from cryptofeed.exchange.huobi_swap import HuobiSwap
+from cryptofeed.exchange.huobi_swap_usdt import HuobiSwapUsdt
 from cryptofeed.exchange.kraken import Kraken
 from cryptofeed.exchange.kraken_futures import KrakenFutures
 from cryptofeed.exchange.okcoin import OKCoin

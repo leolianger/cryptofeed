@@ -14,7 +14,7 @@ import requests
 
 from cryptofeed.defines import (BINANCE, BINANCE_FUTURES, BINANCE_JERSEY, BINANCE_US, BITCOINCOM, BITFINEX, BITMAX,
                                 BITSTAMP, BITTREX, BLOCKCHAIN, BYBIT, COINBASE, COINBENE, EXX, FTX, FTX_US, GEMINI,
-                                HITBTC, HUOBI, HUOBI_DM, HUOBI_SWAP, KRAKEN, OKCOIN, OKEX, POLONIEX, UPBIT)
+                                HITBTC, HUOBI, HUOBI_DM, HUOBI_SWAP, HUOBI_SWAP_USDT, KRAKEN, OKCOIN, OKEX, POLONIEX, UPBIT)
 
 
 LOG = logging.getLogger('feedhandler')
@@ -240,6 +240,13 @@ def huobi_swap_pairs():
         pairs[e['contract_code']] = e['contract_code']
     return pairs
 
+def huobi_swap_usdt_pairs():
+    r = requests.get('https://api.hbdm.com/linear-swap-api/v1/swap_contract_info').json()
+    pairs = {}
+    for e in r['data']:
+        pairs[e['contract_code']] = e['contract_code']
+    return pairs
+
 
 def okcoin_pairs():
     r = requests.get('https://www.okcoin.com/api/spot/v3/instruments').json()
@@ -309,6 +316,7 @@ _exchange_function_map = {
     HUOBI: huobi_pairs,
     HUOBI_DM: huobi_dm_pairs,
     HUOBI_SWAP: huobi_swap_pairs,
+    HUOBI_SWAP_USDT: huobi_swap_usdt_pairs,
     OKCOIN: okcoin_pairs,
     OKEX: okex_pairs,
     COINBENE: coinbene_pairs,

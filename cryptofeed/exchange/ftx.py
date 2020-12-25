@@ -176,6 +176,7 @@ class FTX(Feed):
                             receipt_timestamp=timestamp)
 
     async def _book(self, msg: dict, timestamp: float):
+        print(msg)
         """
         example messages:
 
@@ -218,6 +219,7 @@ class FTX(Feed):
 
     async def message_handler(self, msg: str, timestamp: float):
         msg = json.loads(msg, parse_float=Decimal)
+        # msg = json.loads(msg)
         if 'type' in msg and msg['type'] == 'subscribed':
             return
         elif 'channel' in msg:

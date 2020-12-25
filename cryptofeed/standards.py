@@ -15,7 +15,7 @@ import pandas as pd
 
 from cryptofeed.defines import (BINANCE, BINANCE_FUTURES, BINANCE_JERSEY, BINANCE_US, BITCOINCOM, BITFINEX, BITMAX, BITMEX,
                                 BITSTAMP, BITTREX, BLOCKCHAIN, BYBIT, COINBASE, COINBENE, DERIBIT, EXX, FILL_OR_KILL, FTX,
-                                FTX_US, FUNDING, GEMINI, HITBTC, HUOBI, HUOBI_DM, HUOBI_SWAP, IMMEDIATE_OR_CANCEL, KRAKEN,
+                                FTX_US, FUNDING, GEMINI, HITBTC, HUOBI, HUOBI_DM, HUOBI_SWAP, HUOBI_SWAP_USDT, IMMEDIATE_OR_CANCEL, KRAKEN,
                                 KRAKEN_FUTURES, L2_BOOK, L2_BOOK_FUTURES, L2_BOOK_SWAP, L3_BOOK, LIMIT, LIQUIDATIONS,
                                 MAKER_OR_CANCEL, MARKET, OKCOIN, OKEX, OPEN_INTEREST, POLONIEX, TICKER, TICKER_FUTURES,
                                 TICKER_SWAP, TRADES, TRADES_FUTURES, TRADES_SWAP, UNSUPPORTED, UPBIT, VOLUME)
@@ -70,7 +70,7 @@ def pair_exchange_to_std(pair):
 def timestamp_normalize(exchange, ts):
     if exchange in {BITMEX, COINBASE, HITBTC, OKCOIN, OKEX, BYBIT, FTX, FTX_US, BITCOINCOM, BLOCKCHAIN}:
         return pd.Timestamp(ts).timestamp()
-    elif exchange in {HUOBI, HUOBI_DM, HUOBI_SWAP, BITFINEX, COINBENE, DERIBIT, BINANCE, BINANCE_US, BINANCE_JERSEY, BINANCE_FUTURES, GEMINI, BITTREX, BITMAX, KRAKEN_FUTURES, UPBIT}:
+    elif exchange in {HUOBI, HUOBI_DM, HUOBI_SWAP, HUOBI_SWAP_USDT, BITFINEX, COINBENE, DERIBIT, BINANCE, BINANCE_US, BINANCE_JERSEY, BINANCE_FUTURES, GEMINI, BITTREX, BITMAX, KRAKEN_FUTURES, UPBIT}:
         return ts / 1000.0
     elif exchange in {BITSTAMP}:
         return ts / 1000000.0
@@ -96,6 +96,7 @@ _feed_to_exchange_map = {
         HUOBI: 'depth.step0',
         HUOBI_DM: 'depth.step0',
         HUOBI_SWAP: 'depth.step0',
+        HUOBI_SWAP_USDT: 'depth.step0',
         OKCOIN: 'spot/depth_l2_tbt',
         OKEX: 'spot/depth_l2_tbt',
         COINBENE: L2_BOOK,
@@ -154,6 +155,7 @@ _feed_to_exchange_map = {
         HUOBI: 'trade.detail',
         HUOBI_DM: 'trade.detail',
         HUOBI_SWAP: 'trade.detail',
+        HUOBI_SWAP_USDT: 'trade.detail',
         OKCOIN: 'spot/trade',
         OKEX: 'spot/trade',
         COINBENE: TRADES,
