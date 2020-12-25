@@ -33,7 +33,16 @@ r = redis.Redis(connection_pool=pool)
 
 
 async def trade(feed, pair, order_id, timestamp, side, amount, price, receipt_timestamp):
-    print(f"Timestamp: {timestamp} Feed: {feed} Pair: {pair} ID: {order_id} Side: {side} Amount: {amount} Price: {price}")
+    # print(f"Timestamp: {timestamp} Feed: {feed} Pair: {pair} ID: {order_id} Side: {side} Amount: {amount} Price: {price}")
+    pair_key = f"hbdm_swap_{pair.lower()}"
+    # print(f"set {pair_key}")
+    j = {}
+    j['ask0'] = float(price)
+    j['bid0'] = float(price)
+    j['update_timestamp'] = time.time()
+    print(f"set {pair_key} {j}")
+    r.set(pair_key,json.dumps(j))
+
 
 
 async def book(feed, pair, book, timestamp, receipt_timestamp):
@@ -82,13 +91,13 @@ async def ticker(**kwargs):
 
 def main():
     fh = FeedHandler()
-    pairs_list = ['BTC-USD','ETH-USD','LTC-USD','EOS-USD','ADA-USD','LINK-USD','ZEC-USD','KNC-USD',
-                  'BCH-USD','BSV-USD','XRP-USD','ETC-USD','TRX-USD','ATOM-USD','IOTA-USD','NEO-USD',
-                  'ONT-USD','XLM-USD','XMR-USD','XTZ-USD','DASH-USD','ALGO-USD','VET-USD','ZRX-USD',
-                  'DOGE-USD','THETA-USD','BAND-USD','OMG-USD','ANT-USD','SNX-USD','WAVES-USD',
-                  'COMP-USD','BTM-USD','MKR-USD','JST-USD','IOST-USD','REN-USD','BAL-USD','JST-USD','DOT-USD'
-                  ,'QTUM-USD','CRV-USD','BAT-USD','KSM-USD','RSR-USD','AKRO-USD','LUNA-USD','STORJ-USD','YFI-USD',
-                  'SUSHI-USD' , 'PEARL-USD', 'YFII-USD', 'GXC-USD',  'TRB-USD',  'UNI-USD',  'USDT-USD']
+    pairs_list = ['BTC-USD', 'ETH-USD', 'LINK-USD', 'FIL-USD', 'UNI-USD', 'DOT-USD', 'EOS-USD', 'ADA-USD', 'LTC-USD', 'BAND-USD',
+                  'WAVES-USD', 'JST-USD', 'ATOM-USD', 'ZEC-USD', 'BCH-USD', 'BSV-USD', 'XRP-USD', 'ETC-USD', 'TRX-USD', 'QTUM-USD',
+                  'IOTA-USD', 'NEO-USD', 'ONT-USD', 'XLM-USD', 'XMR-USD', 'XTZ-USD', 'DASH-USD', 'ALGO-USD', 'VET-USD', 'ZRX-USD',
+                  'DOGE-USD', 'THETA-USD', 'REN-USD', 'IOST-USD', 'BTM-USD', 'COMP-USD', 'SNX-USD', 'OMG-USD', 'ANT-USD', 'CRV-USD',
+                  'KSM-USD', 'RSR-USD', 'STORJ-USD', 'YFI-USD', 'SUSHI-USD', 'YFII-USD', 'TRB-USD', 'SUN-USD', 'AAVE-USD', 'NEAR-USD',
+                  'GRT-USD', 'AVAX-USD', 'PEARL-USD', 'BAL-USD', 'GXC-USD', 'MKR-USD', 'KNC-USD', 'BAT-USD']
+
     # 'YFV-USD',
 
     # 'LEND-USD',
@@ -101,7 +110,8 @@ def main():
 
     # fh.add_feed(HuobiDM(max_depth=1, pairs=['BTC_CQ'], channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
 
-    fh.add_feed(HuobiSwap(max_depth=1, pairs=pairs_list, channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
+    # fh.add_feed(HuobiSwap(max_depth=1, pairs=pairs_list, channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
+    fh.add_feed(HuobiSwap(max_depth=1, pairs=pairs_list, channels=[ TRADES], callbacks={ TRADES: BookCallback(trade)}))
     # fh.add_feed(HuobiSwap(pairs=['BTC-USD'], channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
 
     fh.run()

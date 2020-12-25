@@ -91,17 +91,12 @@ async def ticker(**kwargs):
 
 def main():
     fh = FeedHandler()
-    # pairs_list = ['BTC-USD','ETH-USD','LTC-USD','EOS-USD','ADA-USD','LINK-USD','ZEC-USD','KNC-USD',
-    #               'BCH-USD','BSV-USD','XRP-USD','ETC-USD','TRX-USD','ATOM-USD','IOTA-USD','NEO-USD',
-    #               'ONT-USD','XLM-USD','XMR-USD','XTZ-USD','DASH-USD','ALGO-USD','VET-USD','ZRX-USD',
-    #               'DOGE-USD','THETA-USD','BAND-USD','OMG-USD','ANT-USD','SNX-USD','WAVES-USD',
-    #               'COMP-USD','BTM-USD','MKR-USD','JST-USD','IOST-USD','REN-USD','BAL-USD','JST-USD','DOT-USD'
-    #               ,'QTUM-USD','CRV-USD','BAT-USD','KSM-USD','RSR-USD','AKRO-USD','LUNA-USD','STORJ-USD','YFI-USD',
-    #               'SUSHI-USD' , 'PEARL-USD', 'YFII-USD', 'GXC-USD',  'TRB-USD',  'UNI-USD',  'USDT-USD']
-    # 'YFV-USD',
+    pairs_list = ['BTC-USDT', 'ETH-USDT', 'XRP-USDT', 'LTC-USDT', 'LINK-USDT', 'TRX-USDT', 'DOT-USDT', 'ADA-USDT', 'EOS-USDT', 'BCH-USDT',
+                  'BSV-USDT', 'YFI-USDT', 'UNI-USDT', 'FIL-USDT', 'YFII-USDT', 'ZEC-USDT', 'ETC-USDT', 'CRV-USDT', 'SUSHI-USDT',
+                  'AAVE-USDT', 'WAVES-USDT', 'ATOM-USDT', 'DASH-USDT', 'KAVA-USDT', 'RSR-USDT', 'NEO-USDT', 'XLM-USDT', 'XMR-USDT',
+                  'ALGO-USDT', 'VET-USDT', 'XTZ-USDT', 'COMP-USDT', 'OMG-USDT', 'KSM-USDT', 'THETA-USDT', 'XEM-USDT', 'BNB-USDT',
+                  'ONT-USDT', 'ZIL-USDT', 'AVAX-USDT', 'BAND-USDT', 'SNX-USDT', 'GRT-USDT']
 
-    # 'LEND-USD',
-    pairs_list = ['BTC-USDT']
 
 
     # fh.add_feed(OKEx(pairs=['EOS-USD-SWAP'], channels=[TRADES_SWAP, L2_BOOK_SWAP, OPEN_INTEREST, FUNDING], callbacks={FUNDING: funding, OPEN_INTEREST: open_interest, TRADES: TradeCallback(trade), L2_BOOK: BookCallback(book), TICKER_SWAP:TickerCallback(ticker)}))
@@ -113,7 +108,7 @@ def main():
 
     # fh.add_feed(HuobiSwapUsdt(max_depth=1, pairs=pairs_list, channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
     fh.add_feed(HuobiSwapUsdt(max_depth=1, pairs=pairs_list, channels=[ TRADES], callbacks={ TRADES: TradeCallback(trade)}))
-    # fh.add_feed(HuobiSwap(pairs=['BTC-USD'], channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
+    # fh.add_feed(HuobiSwap(pairs=['BTC-USDT'], channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
 
     fh.run()
 
