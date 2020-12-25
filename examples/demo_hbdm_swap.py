@@ -111,7 +111,7 @@ def main():
     # fh.add_feed(HuobiDM(max_depth=1, pairs=['BTC_CQ'], channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
 
     # fh.add_feed(HuobiSwap(max_depth=1, pairs=pairs_list, channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
-    fh.add_feed(HuobiSwap(max_depth=1, pairs=pairs_list, channels=[ TRADES], callbacks={ TRADES: BookCallback(trade)}))
+    fh.add_feed(HuobiSwap(max_depth=1, pairs=pairs_list, channels=[ TRADES], callbacks={ TRADES: TradeCallback(trade)}))
     # fh.add_feed(HuobiSwap(pairs=['BTC-USD'], channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
 
     fh.run()
