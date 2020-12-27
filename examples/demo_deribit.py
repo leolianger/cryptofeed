@@ -54,7 +54,9 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
     bids = book[BID]
     bid0_price = 0
     ask0_price = 0
-    bid0_price = float(list(bids)[-1])
+    list_bids =   list(bids)
+    if(len(list_bids) > 0):
+        bid0_price = float([-1])
     # for price in bids:
     #     bid0_price = float(price)
     #     # print(f"bid0 price is {price}, amount {bids[price]}")
