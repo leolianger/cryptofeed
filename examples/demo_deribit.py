@@ -31,7 +31,7 @@ r = redis.Redis(connection_pool=pool)
 
 async def trade(feed, pair, order_id, timestamp, side, amount, price, receipt_timestamp):
     # print(f"Timestamp: {timestamp} Feed: {feed} Pair: {pair} ID: {order_id} Side: {side} Amount: {amount} Price: {price}")
-    pair_key = f"hbdm_swap_{pair.lower()}"
+    pair_key = f"{ex_name}_{pair.lower()}"
     # print(f"set {pair_key}")
     j = {}
     j['ask0'] = float(price)
@@ -66,7 +66,7 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
         ask0_price = float(price)
         # print(f"ask0 price is {price}, amount {asks[price]}")
         break
-    pair_key = f"hbdm_swap_{pair.lower()}"
+    pair_key = f"{ex_name}_{pair.lower()}"
     # print(f"set {pair_key}")
     j = {}
     j['ask0'] = ask0_price
@@ -104,6 +104,7 @@ def get_expiry_date_of_instrument(instrument_name):
 def main():
     f = FeedHandler()
 
+
     deribit_ex = Deribit(['BTC-PERPETUAL','ETH-PERPETUAL'])
     instruments = deribit_ex.get_instruments()
     timestamps = [get_expiry_date_of_instrument(x) for x in instruments]
@@ -135,4 +136,5 @@ def main():
 
 
 if __name__ == '__main__':
+    ex_name = "deribit"
     main()
