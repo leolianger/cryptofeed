@@ -1,3 +1,12 @@
+import os,sys
+curDir = os.path.dirname(__file__)
+sys.path.append(os.path.abspath(os.path.dirname(__file__)+'/../'))
+sys.path.append(os.path.abspath(os.path.dirname(__file__)+'/'))
+cur_dir = os.path.dirname( os.path.abspath(__file__)) or os.getcwd()
+sys.path.append(cur_dir)
+sys.path.append("..")
+
+
 from cryptofeed import FeedHandler
 from cryptofeed.callback import BookCallback, TickerCallback, TradeCallback
 from cryptofeed.defines import BID, ASK, FUNDING, L2_BOOK, OPEN_INTEREST, TICKER, TRADES
@@ -8,6 +17,7 @@ import json
 from datetime import date
 import calendar
 import operator
+
 
 
 redis_ip = '127.0.0.1'
