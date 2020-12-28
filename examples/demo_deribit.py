@@ -35,7 +35,9 @@ async def trade(feed, pair, order_id, timestamp, side, amount, price, receipt_ti
     # print(f"set {pair_key}")
     j = {}
     j['ask0'] = float(price)
+    j['ask0_amount'] = float(amount)
     j['bid0'] = float(price)
+    j['bid0_amount'] = float(amount)
     j['update_timestamp'] = time.time()
     print(f"set {pair_key} {j}")
     r.set(pair_key,json.dumps(j))
@@ -54,9 +56,12 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
     bids = book[BID]
     bid0_price = 0
     ask0_price = 0
+    ask0_amount = 0
     list_bids =   list(bids)
     if(len(list_bids) > 0):
         bid0_price = float(list_bids[-1])
+        bid0_amount = float(list_bids[-1])
+
     # for price in bids:
     #     bid0_price = float(price)
     #     # print(f"bid0 price is {price}, amount {bids[price]}")
@@ -64,13 +69,16 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
     asks = book[ASK]
     for price in asks:
         ask0_price = float(price)
+        ask0_amount = float(asks[price])
         # print(f"ask0 price is {price}, amount {asks[price]}")
         break
     pair_key = f"{ex_name}_{pair.lower()}"
     # print(f"set {pair_key}")
     j = {}
     j['ask0'] = ask0_price
+    j['ask0_amount'] = ask0_amount
     j['bid0'] = bid0_price
+    j['bid0_amount'] = bid0_amount
     j['update_timestamp'] = time.time()
     print(f"set {pair_key} {j}")
     r.set(pair_key,json.dumps(j))
