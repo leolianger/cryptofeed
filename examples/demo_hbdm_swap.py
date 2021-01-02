@@ -96,7 +96,7 @@ def main():
                   'IOTA-USD', 'NEO-USD', 'ONT-USD', 'XLM-USD', 'XMR-USD', 'XTZ-USD', 'DASH-USD', 'ALGO-USD', 'VET-USD', 'ZRX-USD',
                   'DOGE-USD', 'THETA-USD', 'REN-USD', 'IOST-USD', 'BTM-USD', 'COMP-USD', 'SNX-USD', 'OMG-USD', 'ANT-USD', 'CRV-USD',
                   'KSM-USD', 'RSR-USD', 'STORJ-USD', 'YFI-USD', 'SUSHI-USD', 'YFII-USD', 'TRB-USD', 'SUN-USD', 'AAVE-USD', 'NEAR-USD',
-                  'GRT-USD', 'BAT-USD']
+                  'GRT-USD']
 
     # 'YFV-USD',
 
