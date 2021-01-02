@@ -95,7 +95,7 @@ def main():
                   'BSV-USDT', 'YFI-USDT', 'UNI-USDT', 'FIL-USDT', 'YFII-USDT', 'ZEC-USDT', 'ETC-USDT', 'CRV-USDT', 'SUSHI-USDT',
                   'AAVE-USDT', 'WAVES-USDT', 'ATOM-USDT', 'DASH-USDT', 'KAVA-USDT', 'RSR-USDT', 'NEO-USDT', 'XLM-USDT', 'XMR-USDT',
                   'ALGO-USDT', 'VET-USDT', 'XTZ-USDT', 'COMP-USDT', 'OMG-USDT', 'KSM-USDT', 'THETA-USDT', 'XEM-USDT', 'BNB-USDT',
-                  'ONT-USDT', 'ZIL-USDT', 'AVAX-USDT', 'BAND-USDT', 'SNX-USDT', 'GRT-USDT']
+                  'ONT-USDT', 'ZIL-USDT',  'BAND-USDT', 'SNX-USDT', 'GRT-USDT']
 
 
 
