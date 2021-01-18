@@ -91,13 +91,12 @@ async def ticker(**kwargs):
 
 def main():
     fh = FeedHandler()
-    pairs_list = ['BTC-USDT', 'ETH-USDT', 'XRP-USDT', 'LTC-USDT', 'LINK-USDT', 'TRX-USDT', 'DOT-USDT', 'ADA-USDT', 'EOS-USDT', 'BCH-USDT',
-                  'BSV-USDT', 'YFI-USDT', 'UNI-USDT', 'FIL-USDT', 'YFII-USDT', 'ZEC-USDT', 'ETC-USDT', 'CRV-USDT', 'SUSHI-USDT',
-                  'AAVE-USDT', 'WAVES-USDT', 'ATOM-USDT', 'DASH-USDT', 'KAVA-USDT', 'RSR-USDT', 'NEO-USDT', 'XLM-USDT', 'XMR-USDT',
-                  'ALGO-USDT', 'VET-USDT', 'XTZ-USDT', 'COMP-USDT', 'OMG-USDT', 'KSM-USDT', 'THETA-USDT', 'XEM-USDT', 'BNB-USDT',
-                  'ONT-USDT', 'ZIL-USDT',  'BAND-USDT', 'SNX-USDT', 'GRT-USDT']
-
-
+    pairs_list = ['BTC-USDT', 'ETH-USDT', 'XRP-USDT', 'LTC-USDT', 'LINK-USDT', 'TRX-USDT', 'DOT-USDT', 'ADA-USDT', 'EOS-USDT',
+     'BCH-USDT', 'BSV-USDT', 'YFI-USDT', 'UNI-USDT', 'FIL-USDT', 'YFII-USDT', 'SNX-USDT', 'BNB-USDT', 'ZEC-USDT',
+     'DASH-USDT', 'ETC-USDT', 'THETA-USDT', 'KSM-USDT', 'ATOM-USDT', 'AAVE-USDT', 'XLM-USDT', 'SUSHI-USDT', 'CRV-USDT',
+     'WAVES-USDT', 'KAVA-USDT', 'RSR-USDT', 'NEO-USDT', 'XMR-USDT', 'ALGO-USDT', 'VET-USDT', 'XTZ-USDT', 'COMP-USDT',
+     'OMG-USDT', 'XEM-USDT', 'ONT-USDT', 'ZIL-USDT', 'AVAX-USDT', 'BAND-USDT', 'GRT-USDT', '1INCH-USDT', 'DOGE-USDT',
+     'MATIC-USDT', 'LRC-USDT', 'SOL-USDT', 'IOTA-USDT']
 
     # fh.add_feed(OKEx(pairs=['EOS-USD-SWAP'], channels=[TRADES_SWAP, L2_BOOK_SWAP, OPEN_INTEREST, FUNDING], callbacks={FUNDING: funding, OPEN_INTEREST: open_interest, TRADES: TradeCallback(trade), L2_BOOK: BookCallback(book), TICKER_SWAP:TickerCallback(ticker)}))
     #fh.add_feed(OKEx(pairs=['EOS-USD-SWAP'], channels=[ TRADES_SWAP,L2_BOOK_SWAP], callbacks={FUNDING: funding, OPEN_INTEREST: open_interest, TRADES_SWAP: TradeCallback(trade), L2_BOOK: BookCallback(book)}))
