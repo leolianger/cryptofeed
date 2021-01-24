@@ -89,14 +89,56 @@ async def ticker(**kwargs):
     print(f"Tikcer: {kwargs}")
 
 
+
+def get_trade_symbol_list():
+    # {
+    #   "status": "ok",
+    #   "data": [
+    #     {
+    #       "symbol": "BTC",
+    #       "contract_code": "BTC-USDT",
+    #       "contract_size": 0.001000000000000000,
+    #       "price_tick": 0.100000000000000000,
+    #       "create_date": "20201021",
+    #       "contract_status": 1,
+    #       "settlement_date": "1608883200000",
+    #       "support_margin_mode": "all"
+    #     },
+    #     {
+    #       "symbol": "ETH",
+    #       "contract_code": "ETH-USDT",
+    #       "contract_size": 0.010000000000000000,
+    #       "price_tick": 0.010000000000000000,
+    #       "create_date": "20201021",
+    #       "contract_status": 1,
+    #       "settlement_date": "1608883200000",
+    #       "support_margin_mode": "all"
+    #     }
+    #     ]
+    # }
+
+    symbol_list = []
+    basic_symbol_url = "https://api.hbdm.com/linear-swap-api/v1/swap_contract_info"
+
+    res = requests.get(basic_symbol_url)
+    res_json = res.json()
+
+    for info in res_json['data']:
+        symbol_list.append(info['contract_code'])
+
+    return symbol_list
+
+
 def main():
     fh = FeedHandler()
-    pairs_list = ['BTC-USDT', 'ETH-USDT', 'XRP-USDT', 'LTC-USDT', 'LINK-USDT', 'TRX-USDT', 'DOT-USDT', 'ADA-USDT', 'EOS-USDT',
-     'BCH-USDT', 'BSV-USDT', 'YFI-USDT', 'UNI-USDT', 'FIL-USDT', 'YFII-USDT', 'SNX-USDT', 'BNB-USDT', 'ZEC-USDT',
-     'DASH-USDT', 'ETC-USDT', 'THETA-USDT', 'KSM-USDT', 'ATOM-USDT', 'AAVE-USDT', 'XLM-USDT', 'SUSHI-USDT', 'CRV-USDT',
-     'WAVES-USDT', 'KAVA-USDT', 'RSR-USDT', 'NEO-USDT', 'XMR-USDT', 'ALGO-USDT', 'VET-USDT', 'XTZ-USDT', 'COMP-USDT',
-     'OMG-USDT', 'XEM-USDT', 'ONT-USDT', 'ZIL-USDT', 'AVAX-USDT', 'BAND-USDT', 'GRT-USDT', '1INCH-USDT', 'DOGE-USDT',
-     'MATIC-USDT', 'LRC-USDT', 'SOL-USDT', 'IOTA-USDT']
+    # pairs_list = ['BTC-USDT', 'ETH-USDT', 'XRP-USDT', 'LTC-USDT', 'LINK-USDT', 'TRX-USDT', 'DOT-USDT', 'ADA-USDT', 'EOS-USDT',
+    #  'BCH-USDT', 'BSV-USDT', 'YFI-USDT', 'UNI-USDT', 'FIL-USDT', 'YFII-USDT', 'SNX-USDT', 'BNB-USDT', 'ZEC-USDT',
+    #  'DASH-USDT', 'ETC-USDT', 'THETA-USDT', 'KSM-USDT', 'ATOM-USDT', 'AAVE-USDT', 'XLM-USDT', 'SUSHI-USDT', 'CRV-USDT',
+    #  'WAVES-USDT', 'KAVA-USDT', 'RSR-USDT', 'NEO-USDT', 'XMR-USDT', 'ALGO-USDT', 'VET-USDT', 'XTZ-USDT', 'COMP-USDT',
+    #  'OMG-USDT', 'XEM-USDT', 'ONT-USDT', 'ZIL-USDT', 'AVAX-USDT', 'BAND-USDT', 'GRT-USDT', '1INCH-USDT', 'DOGE-USDT',
+    #  'MATIC-USDT', 'LRC-USDT', 'SOL-USDT', 'IOTA-USDT']
+
+    pairs_list = get_trade_symbol_list()
 
     # fh.add_feed(OKEx(pairs=['EOS-USD-SWAP'], channels=[TRADES_SWAP, L2_BOOK_SWAP, OPEN_INTEREST, FUNDING], callbacks={FUNDING: funding, OPEN_INTEREST: open_interest, TRADES: TradeCallback(trade), L2_BOOK: BookCallback(book), TICKER_SWAP:TickerCallback(ticker)}))
     #fh.add_feed(OKEx(pairs=['EOS-USD-SWAP'], channels=[ TRADES_SWAP,L2_BOOK_SWAP], callbacks={FUNDING: funding, OPEN_INTEREST: open_interest, TRADES_SWAP: TradeCallback(trade), L2_BOOK: BookCallback(book)}))
