@@ -37,7 +37,7 @@ r = redis.Redis(connection_pool=pool)
 # Timestamp: 1608857271.874 Feed: HUOBI_SWAP_USDT Pair: BTC-USDT ID: 52743207850002 Side: sell Amount: 600 Price: 23608
 async def trade(feed, pair, order_id, timestamp, side, amount, price, receipt_timestamp):
     # print(f"Timestamp: {timestamp} Feed: {feed} Pair: {pair} ID: {order_id} Side: {side} Amount: {amount} Price: {price}")
-    pair_key = f"binance_swap_{pair.lower()}"
+    pair_key = f"binance_usdt_swap_{pair.lower()}"
     # print(f"set {pair_key}")
     j = {}
     j['ask0'] = float(price)
