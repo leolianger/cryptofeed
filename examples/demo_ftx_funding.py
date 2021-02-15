@@ -17,6 +17,9 @@ from cryptofeed import FeedHandler
 from cryptofeed.callback import FundingCallback
 from cryptofeed.defines import FUNDING
 from cryptofeed.exchanges import FTX
+from cryptofeed.pairs import ftx_pairs
+
+
 
 from cryptofeed.callback import BookCallback, TickerCallback, TradeCallback
 from cryptofeed.defines import BID, ASK, L2_BOOK, TICKER, TRADES
@@ -44,6 +47,16 @@ async def funding(**kwargs):
     print(kwargs)
 
 
+async def trade(feed, pair, order_id, timestamp, side, amount, price, receipt_timestamp):
+    # print(f"Timestamp: {timestamp} Feed: {feed} Pair: {pair} ID: {order_id} Side: {side} Amount: {amount} Price: {price}")
+    pair_key = f"ftx_swap_{pair.lower()}"
+    # print(f"set {pair_key}")
+    j = {}
+    j['ask0'] = float(price)
+    j['bid0'] = float(price)
+    j['update_timestamp'] = time.time()
+    print(f"set {pair_key} {j}")
+    r.set(pair_key,json.dumps(j))
 
 
 async def book(feed, pair, book, timestamp, receipt_timestamp):
@@ -80,10 +93,26 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
     r.set(pair_key,json.dumps(order_book_j))
 
 
+
+def get_trade_symbol_list():
+    all_pairs = ftx_pairs()
+    perp_pair = {}
+    for pair_name in all_pairs:
+        if("PERP" in pair_name):
+            perp_pair[pair_name] = all_pairs[pair_name]
+
+    return perp_pair
+
+
+
+
 def main():
     f = FeedHandler()
     # f.add_feed(FTX(max_depth=10,pairs=['BTC-PERP'], channels=[FUNDING,L2_BOOK], callbacks={L2_BOOK: BookCallback(book),FUNDING: FundingCallback(funding)}))
-    f.add_feed(FTX(max_depth=10,pairs=['BTC-PERP'], channels=[L2_BOOK], callbacks={L2_BOOK: BookCallback(book),FUNDING: FundingCallback(funding)}))
+    # f.add_feed(FTX(max_depth=10,pairs=['BTC-PERP'], channels=[L2_BOOK], callbacks={L2_BOOK: BookCallback(book),FUNDING: FundingCallback(funding)}))
+    perp_pairs = get_trade_symbol_list()
+    print(perp_pairs)
+    f.add_feed(FTX(max_depth=1,pairs=perp_pairs, channels=[TRADES], callbacks={ TRADES: TradeCallback(trade)}))
 
 
     f.run()
