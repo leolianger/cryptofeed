@@ -176,7 +176,7 @@ class FTX(Feed):
                             receipt_timestamp=timestamp)
 
     async def _book(self, msg: dict, timestamp: float):
-        print(msg)
+        # print(msg)
         """
         example messages:
 
