@@ -111,7 +111,7 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
         # print(f"ask0 price is {price}, amount {asks[price]}")
         break
     pair = pair.replace("-USD",'/usd')
-    pair_key = f"ftx_{pair.lower()}_book"
+    pair_key = f"ftx_swap_{pair.lower()}"
     # print(f"set {pair_key}")
     j = {}
     j['ask0'] = ask0_price
