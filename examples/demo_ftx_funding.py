@@ -110,6 +110,10 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
         ask0_amount = float(asks[price])
         # print(f"ask0 price is {price}, amount {asks[price]}")
         break
+
+    h_key = f"ftx_swap"
+    h_key_pair = f"{pair.lower()}"
+    
     pair = pair.replace("-USD",'/usd')
     pair_key = f"ftx_swap_{pair.lower()}"
     # print(f"set {pair_key}")
@@ -121,6 +125,8 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
     j['update_timestamp'] = time.time()
     print(f"set {pair_key} {j}")
     r.set(pair_key,json.dumps(j))
+    r.hset(h_key,h_key_pair,json.dumps(j))
+
 
 
 

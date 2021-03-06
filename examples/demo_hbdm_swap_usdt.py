@@ -70,9 +70,9 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
     # print(f"set {pair_key}")
     j = {}
     j['ask0'] = ask0_price
-    j['ask0_size'] = ask0_size
+    j['ask0_amount'] = ask0_size
     j['bid0'] = bid0_price
-    j['bid0_size'] = bid0_size
+    j['bid0_amount'] = bid0_size
     j['update_timestamp'] = time.time()
     print(f"set {pair_key} {j}")
     r.set(pair_key,json.dumps(j))

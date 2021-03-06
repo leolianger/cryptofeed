@@ -55,21 +55,30 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
     ask0_price = 0
     for price in bids:
         bid0_price = float(price)
+        bid0_amount = float(bids[price])
         # print(f"bid0 price is {price}, amount {bids[price]}")
         break
     asks = book[ASK]
     for price in asks:
         ask0_price = float(price)
+        ask0_amount = float(asks[price])
         # print(f"ask0 price is {price}, amount {asks[price]}")
         break
-    pair_key = f"hbdm_swap_{pair.lower()}"
+
+    h_key = f"binance_usdt_swap"
+    h_key_pair = f"{pair.lower()}"
+    
+    pair_key = f"binance_usdt_swap_{pair.lower()}"
     # print(f"set {pair_key}")
     j = {}
     j['ask0'] = ask0_price
+    j['ask0_amount'] = ask0_amount
     j['bid0'] = bid0_price
+    j['bid0_amount'] = bid0_price
     j['update_timestamp'] = time.time()
     print(f"set {pair_key} {j}")
     r.set(pair_key,json.dumps(j))
+    r.hset(h_key,h_key_pair,json.dumps(j))
 
 
     # if((not pair_key in last_update_timestamp_dict) or ( (pair_key in last_update_timestamp_dict) and (time.time() - last_update_timestamp_dict[pair_key] > 300))):
@@ -309,8 +318,8 @@ def main():
 
     # fh.add_feed(HuobiDM(max_depth=1, pairs=['BTC_CQ'], channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
 
-    # fh.add_feed(HuobiSwapUsdt(max_depth=1, pairs=pairs_list, channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
-    fh.add_feed(BinanceFutures(max_depth=1, pairs=pairs_list, channels=[ TRADES], callbacks={ TRADES: TradeCallback(trade)}))
+    fh.add_feed(BinanceFutures(max_depth=1, pairs=pairs_list, channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
+    # fh.add_feed(BinanceFutures(max_depth=1, pairs=pairs_list, channels=[ TRADES], callbacks={ TRADES: TradeCallback(trade)}))
     # fh.add_feed(HuobiSwap(pairs=['BTC-USDT'], channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
 
     fh.run()
