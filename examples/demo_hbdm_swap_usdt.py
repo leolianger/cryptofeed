@@ -50,24 +50,33 @@ async def book(feed, pair, book, timestamp, receipt_timestamp):
     # print(f'Timestamp: {timestamp} Feed: {feed} Pair: {pair} Book Bid Size is {len(book[BID])} Ask Size is {len(book[ASK])}, Bid is {book[BID]}, Ask is {book[ASK]}')
     bids = book[BID]
     bid0_price = 0
+    bid0_size = 0
     ask0_price = 0
+    ask0_size = 0
     for price in bids:
         bid0_price = float(price)
+        bid0_size = float(bids[price])
         # print(f"bid0 price is {price}, amount {bids[price]}")
         break
     asks = book[ASK]
     for price in asks:
         ask0_price = float(price)
+        ask0_size = float(asks[price])
         # print(f"ask0 price is {price}, amount {asks[price]}")
         break
+    h_key = f"hbdm_swap_usdt"
+    h_key_pair = f"{pair.lower()}"
     pair_key = f"hbdm_swap_{pair.lower()}"
     # print(f"set {pair_key}")
     j = {}
     j['ask0'] = ask0_price
+    j['ask0_size'] = ask0_size
     j['bid0'] = bid0_price
+    j['bid0_size'] = bid0_size
     j['update_timestamp'] = time.time()
     print(f"set {pair_key} {j}")
     r.set(pair_key,json.dumps(j))
+    r.hset(h_key,h_key_pair,json.dumps(j))
 
 
     # if((not pair_key in last_update_timestamp_dict) or ( (pair_key in last_update_timestamp_dict) and (time.time() - last_update_timestamp_dict[pair_key] > 300))):
@@ -147,8 +156,8 @@ def main():
 
     # fh.add_feed(HuobiDM(max_depth=1, pairs=['BTC_CQ'], channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
 
-    # fh.add_feed(HuobiSwapUsdt(max_depth=1, pairs=pairs_list, channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
-    fh.add_feed(HuobiSwapUsdt(max_depth=1, pairs=pairs_list, channels=[ TRADES], callbacks={ TRADES: TradeCallback(trade)}))
+    fh.add_feed(HuobiSwapUsdt(max_depth=1, pairs=pairs_list, channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
+    # fh.add_feed(HuobiSwapUsdt(max_depth=1, pairs=pairs_list, channels=[ TRADES], callbacks={ TRADES: TradeCallback(trade)}))
     # fh.add_feed(HuobiSwap(pairs=['BTC-USDT'], channels=[ L2_BOOK], callbacks={ L2_BOOK: BookCallback(book)}))
 
     fh.run()
